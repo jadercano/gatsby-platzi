@@ -11,10 +11,10 @@ const Thanks = () => {
         <h2>Successful buy</h2>
         <p>We hope you enjoy your Swag!</p>
         <p>Waiting for you to back soon! Never stop learning!</p>
-        <span rol="img" aria-label="emoji">
+        <span role="img" aria-label="emoji">
           ❤
         </span>
-        <Link>
+        <Link to="/">
           <Button>Back Home</Button>
         </Link>
       </Purchase>

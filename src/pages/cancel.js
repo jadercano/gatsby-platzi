@@ -14,7 +14,7 @@ const Cancel = () => {
         <span rol="img" aria-label="emoji">
           ❤
         </span>
-        <Link>
+        <Link to="/">
           <Button>Back Home</Button>
         </Link>
       </Purchase>

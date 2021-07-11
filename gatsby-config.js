@@ -1,3 +1,10 @@
+const dotenv = require("dotenv")
+const path = require("path")
+
+dotenv.config({
+  path: path.resolve(__dirname, "src", `.env.${process.env.NODE_ENV}`),
+})
+
 module.exports = {
   siteMetadata: {
     title: `Platziswag`,
@@ -6,6 +13,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-stripe`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -35,6 +43,13 @@ module.exports = {
       },
     },
     `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: [`Price`],
+        secretKey: process.env.STRIPE_SK,
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

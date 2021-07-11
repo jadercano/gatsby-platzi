@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link } from "gatsby"
 import { MenuItem, StyledHeader } from "../styles/components"
 
-const Header = ({ siteTitle }) => (
+const Header = () => (
   <StyledHeader>
     <Link to="/">
       <img src="https://i.postimg.cc/6q3pg48v/Logo.png" alt="Logo" />
@@ -24,16 +24,7 @@ const Header = ({ siteTitle }) => (
         </MenuItem>
       </ul>
     </nav>
-    <div>
-      <h1>
-        <Link to="/">{siteTitle}</Link>
-      </h1>
-    </div>
   </StyledHeader>
 )
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
 
 export default Header

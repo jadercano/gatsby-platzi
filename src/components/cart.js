@@ -7,6 +7,7 @@ import priceFormat from "../utils/priceFormat"
 const Cart = () => {
   const { cart } = useContext(CartContext)
   const [total, setTotal] = useState(0)
+  const [stripe, setStripe] = useState()
 
   const getTotal = () => {
     if (cart && cart.length > 0) {
@@ -16,7 +17,22 @@ const Cart = () => {
     }
   }
 
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const { error } = await stripe.redirectToCheckout({
+      items: cart.map(({ id, quantity }) => ({ id, quantity })),
+      successUrl: process.env.SUCCESS_REDIRECT,
+      cancelUrl: process.env.CANCEL_REDIRECT,
+    })
+    if (error) {
+      throw error
+    }
+  }
+
   useEffect(() => {
+    setStripe(
+      window.Stripe(process.env.STRIPE_PK, { betas: ["checkout_beta_4"] })
+    )
     getTotal()
   }, [])
 
@@ -57,7 +73,9 @@ const Cart = () => {
           <Link to="/">
             <Button type="outline">Go back</Button>
           </Link>
-          <Button>Buy</Button>
+          <Button onClick={handleSubmit} disabled={cart.length === 0}>
+            Buy
+          </Button>
         </div>
       </nav>
     </StyledCart>
